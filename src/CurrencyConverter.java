@@ -13,15 +13,15 @@ public class CurrencyConverter {
         String urlStr = BASE_URL + moedaBase;
         HttpResponse<String> response = HttpClientConnection.getResponse(urlStr);
 
-
+        // Verifique o status da resposta
         if (response.statusCode() != 200) {
             throw new Exception("Erro ao buscar taxas de câmbio: " + response.statusCode());
         }
 
-
+        // Obtenha o corpo da resposta
         String responseBody = response.body();
 
-
+        // Parse do JSON usando Gson
         JsonParser jp = new JsonParser();
         JsonElement root = jp.parse(responseBody);
         JsonObject jsonobj = root.getAsJsonObject();
